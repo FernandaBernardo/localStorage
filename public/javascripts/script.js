@@ -36,10 +36,24 @@ var APP = (function() {
 			for (var i = 0; i < list.length; i++) {
 				var li = document.createElement("li");
 				li.textContent = list[i];
+
+				var del = createLink("delete");
+				var edit = createLink("edit");
+				li.appendChild(del);
+				li.appendChild(edit);
+
 				module.list.appendChild(li);
 			}
 		}
 	};
+
+	var createLink = function(text) {
+		var a = document.createElement("a");
+		a.href = "#";
+		a.textContent = text;
+		a.className = text;
+		return a;
+	}
 
 	module.init = function() {
 		module.add.onclick = module.validate;
