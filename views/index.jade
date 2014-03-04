@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1.titulo HTML5 - Local Storage
+
+	h2.sub-titulo Lista de Tarefas
+
+	form
+		input.task(type="text", placeholder="Tarefa")
+		button.add(type="submit") ADD
+
+	ul.lista
+		li Não tem tarefas cadastradas
