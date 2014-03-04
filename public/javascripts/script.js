@@ -37,8 +37,8 @@ var APP = (function() {
 				var li = document.createElement("li");
 				li.textContent = list[i];
 
-				var del = createLink("delete");
-				var edit = createLink("edit");
+				var del = createLink("delete", module.del);
+				var edit = createLink("edit", module.edit);
 				li.appendChild(del);
 				li.appendChild(edit);
 
@@ -47,13 +47,28 @@ var APP = (function() {
 		}
 	};
 
-	var createLink = function(text) {
+	module.del = function(e) {
+		e.preventDefault();
+		var list = JSON.parse(localStorage.getItem("tasks"));
+		var text = e.srcElement.parentElement.firstChild.data
+		var index = list.indexOf(text);
+		list.splice(index, 1);
+		localStorage.setItem("tasks", JSON.stringify(list));
+		module.updateList();
+	};
+
+	module.edit = function(e) {
+		e.preventDefault();
+	};
+
+	var createLink = function(text, func) {
 		var a = document.createElement("a");
 		a.href = "#";
 		a.textContent = text;
 		a.className = text;
+		a.onclick = func;
 		return a;
-	}
+	};
 
 	module.init = function() {
 		module.add.onclick = module.validate;
